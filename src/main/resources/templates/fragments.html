@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+    <header th:fragment="header" class="bg-dark text-white py-3 mb-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="/" class="navbar-brand text-white fw-bold" th:text="${brandName ?: 'ShopEasy'}">ShopEasy</a>
+                </div>
+                <div class="col-md-8 d-flex justify-content-end align-items-center">
+                    <ul class="navbar-nav d-flex flex-row mb-2 mb-md-0">
+                        <li class="nav-item mx-3"><a class="text-white text-decoration-none" href="/">Home</a></li>
+                        <li class="nav-item mx-3"><a class="text-white text-decoration-none" href="/products">Products</a></li>
+                        <li class="nav-item mx-3"><a class="text-white text-decoration-none" href="/about">About</a></li>
+                        <li class="nav-item mx-3"><a class="text-white text-decoration-none" href="/contact">Contact</a></li>
+                    </ul>
+                    <div class="d-flex align-items-center">
+                        <a href="/cart" class="text-white text-decoration-none me-3 position-relative">
+                            <i class="bi bi-cart4 fs-4"></i>
+                            <span th:if="${cartCount > 0}" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;" th:text="${cartCount}">0</span>
+                        </a>
+                        <div sec:authorize="isAuthenticated()" class="d-flex align-items-center">
+                            <span class="text-white me-2 small" sec:authentication="name"></span>
+                            <form th:action="@{/logout}" method="post" class="mb-0">
+                                <button type="submit" class="btn btn-link text-white text-decoration-none p-0">Logout</button>
+                            </form>
+                        </div>
+                        <a sec:authorize="isAnonymous()" href="/login" class="btn btn-outline-light btn-sm">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <footer th:fragment="footer" class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <h5 class="text-white fw-bold" th:text="${brandName ?: 'ShopEasy'}">ShopEasy</h5>
+                    <p class="text-muted">Your one-stop shop for all your needs. Quality products at affordable prices.</p>
+                </div>
+                <div class="col-md-2 mb-3 mb-md-0">
+                    <h6 class="text-white">Company</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="/about" class="text-white text-decoration-none">About Us</a></li>
+                        <li><a href="/careers" class="text-white text-decoration-none">Careers</a></li>
+                        <li><a href="/blog" class="text-white text-decoration-none">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-3 mb-md-0">
+                    <h6 class="text-white">Support</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="/help" class="text-white text-decoration-none">Help Center</a></li>
+                        <li><a href="/contact" class="text-white text-decoration-none">Contact Us</a></li>
+                        <li><a href="/returns" class="text-white text-decoration-none">Returns</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="text-white">Newsletter</h6>
+                    <p>Get the latest updates and offers.</p>
+                    <form th:action="@{/subscribe}" method="post">
+                        <div class="input-group">
+                            <input type="email" name="email" class="form-control" placeholder="Your email address" required>
+                            <button class="btn btn-primary" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr class="border-secondary my-4">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="text-muted mb-0">&copy; <span th:text="${currentYear ?: 2024}">2024</span> ShopEasy. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="text-muted mb-0">Follow us:
+                        <a href="#" class="text-white text-decoration-none me-2">Facebook</a>
+                        <a href="#" class="text-white text-decoration-none me-2">Twitter</a>
+                        <a href="#" class="text-white text-decoration-none">Instagram</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
