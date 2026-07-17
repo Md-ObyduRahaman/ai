@@ -46,6 +46,13 @@ public class HomeController {
             new Product("Android Tablet", "Perfect for entertainment and productivity", 329.99, "/images/tablet.svg")
         );
         model.addAttribute("products", products);
+
+        var newArrivals = java.util.List.of(
+            new Product("USB-C Cable", "Fast charging data cable", 14.99, "/images/headphones.svg"),
+            new Product("Wireless Earbuds", "Compact true-wireless earbuds", 79.99, "/images/headphones.svg"),
+            new Product("4K Webcam", "Crystal-clear video for streaming", 129.99, "/images/camera.svg")
+        );
+        model.addAttribute("newArrivals", newArrivals);
         return "index";
     }
 
