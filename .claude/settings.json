@@ -1,0 +1,10 @@
+
+{
+  "skills": {
+    "review-pr": {
+      "name": "review-pr",
+      "scope": "project",
+      "interrupt": true
+    }
+  }
+}
