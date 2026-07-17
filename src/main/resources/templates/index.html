@@ -51,21 +51,25 @@
             <h2 class="section-title fw-bold">New Arrivals</h2>
             <p class="text-muted mb-4">Check out our latest products just added to the store.</p>
             <div class="row g-4">
-                <div class="col-md-4" th:each="product : ${newArrivals}">
-                    <div class="card h-100 product-card">
-                        <img th:src="${product.imageUrl}" class="product-img" alt="Product image">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title" th:text="${product.name}">Product Name</h5>
-                            <p class="card-text text-muted flex-grow-1" th:text="${product.description}">Description</p>
-                            <div class="mt-auto">
-                                <span class="h5 text-primary" th:text="${'$' + #numbers.formatDecimal(product.price, 1, 2)}">$99.99</span>
-                                <form sec:authorize="isAuthenticated()" th:action="@{/cart/add}" method="post" class="d-inline">
-                                    <input type="hidden" name="name" th:value="${product.name}">
-                                    <input type="hidden" name="imageUrl" th:value="${product.imageUrl}">
-                                    <input type="hidden" name="price" th:value="${product.price}">
-                                    <button type="submit" class="btn btn-outline-primary ms-2">Add to Cart</button>
-                                </form>
-                                <a sec:authorize="isAnonymous()" href="/login" class="btn btn-outline-secondary ms-2">Login to Buy</a>
+                <div class="col-12">
+                    <div class="d-flex overflow-auto gap-4" style="scroll-snap-type: x; padding: 0.5rem 0;">
+                        <div th:each="product : ${newArrivals}" class="flex-none scroll-snap-align-start">
+                            <div class="card h-100 product-card" style="min-width: 280px; max-width: 280px;">
+                                <img th:src="${product.imageUrl}" class="product-img" alt="Product image">
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title" th:text="${product.name}">Product Name</h5>
+                                    <p class="card-text text-muted flex-grow-1" th:text="${product.description}">Description</p>
+                                    <div class="mt-auto">
+                                        <span class="h5 text-primary" th:text="${'$' + #numbers.formatDecimal(product.price, 1, 2)}">$99.99</span>
+                                        <form sec:authorize="isAuthenticated()" th:action="@{/cart/add}" method="post" class="d-inline">
+                                            <input type="hidden" name="name" th:value="${product.name}">
+                                            <input type="hidden" name="imageUrl" th:value="${product.imageUrl}">
+                                            <input type="hidden" name="price" th:value="${product.price}">
+                                            <button type="submit" class="btn btn-outline-primary ms-2">Add to Cart</button>
+                                        </form>
+                                        <a sec:authorize="isAnonymous()" href="/login" class="btn btn-outline-secondary ms-2">Login to Buy</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
