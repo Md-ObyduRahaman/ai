@@ -101,6 +101,15 @@ Browser → GET /about               → HomeController.about() → template: ab
 Browser → GET /contact             → HomeController.contact() → template: contact.html
 ```
 
+### Index Page Sections
+```
+Browser → GET / (index.html)
+                                    → model: brandName, heroTitle, heroSubtitle, featured products, cartCount
+                                    → template: index.html
+                                    → sections: Hero → Featured Products → New Arrivals → Features → Footer
+                                    → New Arrivals section: 3 products displayed in a responsive grid
+```
+
 ### Blog Flow
 ```
 Browser → GET /blog                → BlogController.blogList()
