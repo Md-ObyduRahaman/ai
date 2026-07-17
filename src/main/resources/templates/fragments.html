@@ -11,13 +11,14 @@
                     <ul class="navbar-nav d-flex flex-row mb-2 mb-md-0">
                         <li class="nav-item mx-3"><a class="text-white text-decoration-none" href="/">Home</a></li>
                         <li class="nav-item mx-3"><a class="text-white text-decoration-none" href="/products">Products</a></li>
+                        <li class="nav-item mx-3"><a class="text-white text-decoration-none" href="/blog">Blog</a></li>
                         <li class="nav-item mx-3"><a class="text-white text-decoration-none" href="/about">About</a></li>
                         <li class="nav-item mx-3"><a class="text-white text-decoration-none" href="/contact">Contact</a></li>
                     </ul>
                     <div class="d-flex align-items-center">
                         <a href="/cart" class="text-white text-decoration-none me-3 position-relative">
                             <i class="bi bi-cart4 fs-4"></i>
-                            <span th:if="${cartCount > 0}" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;" th:text="${cartCount}">0</span>
+                            <span th:if="${cartCount > 0}" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-badge" th:text="${cartCount}">0</span>
                         </a>
                         <div sec:authorize="isAuthenticated()" class="d-flex align-items-center">
                             <span class="text-white me-2 small" sec:authentication="name"></span>
