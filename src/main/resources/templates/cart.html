@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${pageTitle} ?: 'Cart'">Cart</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
     <header th:replace="fragments :: header"></header>
@@ -23,24 +23,24 @@
                     <table class="table align-middle">
                         <thead class="table-light">
                             <tr>
-                                <th style="width: 80px"></th>
+                                <th class="cart-thumb-col"></th>
                                 <th>Product</th>
-                                <th class="text-center" style="width: 150px">Quantity</th>
-                                <th class="text-end" style="width: 120px">Price</th>
-                                <th class="text-end" style="width: 120px">Total</th>
-                                <th style="width: 60px"></th>
+                                <th class="text-center cart-qty-col">Quantity</th>
+                                <th class="text-end cart-price-col">Price</th>
+                                <th class="text-end cart-total-col">Total</th>
+                                <th class="cart-action-col"></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="item : ${cartItems}">
                                 <td>
-                                    <img th:src="${item.imageUrl}" alt="" style="width: 60px; height: 60px; object-fit: contain;">
+                                    <img th:src="${item.imageUrl}" alt="" class="cart-item-img">
                                 </td>
                                 <td><span th:text="${item.name}">Product</span></td>
                                 <td class="text-center">
                                     <form th:action="@{/cart/update}" method="post" class="d-inline-flex align-items-center gap-2">
                                         <input type="hidden" name="name" th:value="${item.name}">
-                                        <input type="number" name="quantity" th:value="${item.quantity}" min="0" class="form-control form-control-sm" style="width: 70px">
+                                        <input type="number" name="quantity" th:value="${item.quantity}" min="0" class="form-control form-control-sm qty-input">
                                         <button type="submit" class="btn btn-sm btn-outline-secondary">Update</button>
                                     </form>
                                 </td>
