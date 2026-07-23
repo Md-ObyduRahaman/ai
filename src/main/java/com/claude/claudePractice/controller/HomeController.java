@@ -7,8 +7,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.Year;
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -28,7 +30,11 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String home(Model model) {
+    public String home(@RequestParam(defaultValue = "1") int page, Model model) {
+        // Show loading indicator for initial page load
+        model.addAttribute("isLoading", true);
+
+        // Meta attributes for template (preserved from original)
         model.addAttribute("pageTitle", "E-Commerce Store");
         model.addAttribute("brandName", "ShopEasy");
         model.addAttribute("heroTitle", "Welcome to Our Store");
@@ -37,6 +43,7 @@ public class HomeController {
         model.addAttribute("currentYear", Year.now().getValue());
         model.addAttribute("cartCount", getCartCount());
 
+        // Featured products (preserved from original)
         var products = java.util.List.of(
             new Product("Wireless Headphones", "Premium sound quality with noise cancellation", 99.99, "/images/headphones.svg"),
             new Product("Smart Watch", "Track your health and stay connected", 149.99, "/images/watch.svg"),
@@ -47,12 +54,33 @@ public class HomeController {
         );
         model.addAttribute("products", products);
 
-        var newArrivals = java.util.List.of(
+        // Expand new arrivals to 8 products
+        var newArrivalsProducts = java.util.List.of(
             new Product("USB-C Cable", "Fast charging data cable", 14.99, "/images/headphones.svg"),
             new Product("Wireless Earbuds", "Compact true-wireless earbuds", 79.99, "/images/headphones.svg"),
-            new Product("4K Webcam", "Crystal-clear video for streaming", 129.99, "/images/camera.svg")
+            new Product("4K Webcam", "Crystal-clear video for streaming", 129.99, "/images/camera.svg"),
+            new Product("Rechargeable Power Bank", "20000mAh portable charger", 39.99, "/images/powerbank.svg"),
+            new Product("Smart Speaker", "Portable Bluetooth speaker with voice assistant", 124.99, "/images/speaker.svg"),
+            new Product("Laptop Backpack", "Waterproof 15-inch laptop carrier", 49.99, "/images/backpack.svg"),
+            new Product("Wireless Charger Pad", "Qi-compatible charging pad", 29.99, "/images/charger.svg"),
+            new Product("Bluetooth Mouse", "Ergonomic wireless mouse", 39.95, "/images/mouse.svg")
         );
-        model.addAttribute("newArrivals", newArrivals);
+
+        // Pagination logic
+        int itemsPerPage = 3;
+        int totalPages = (int) Math.ceil(newArrivalsProducts.size() / (double) itemsPerPage);
+        int start = (page - 1) * itemsPerPage;
+        int end = Math.min(start + itemsPerPage, newArrivalsProducts.size());
+        List<Product> currentPage = newArrivalsProducts.subList(start, end);
+        int currentPageNum = page;
+
+        // Add attributes for pagination controls
+        model.addAttribute("newArrivals", currentPage);
+        model.addAttribute("currentPage", currentPageNum);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("hasPrev", currentPageNum > 1);
+        model.addAttribute("hasNext", currentPageNum < totalPages);
+
         return "index";
     }
 
