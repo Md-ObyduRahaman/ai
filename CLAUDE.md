@@ -101,6 +101,15 @@ Browser → GET /about               → HomeController.about() → template: ab
 Browser → GET /contact             → HomeController.contact() → template: contact.html
 ```
 
+### Index Page Sections
+```
+Browser → GET / (index.html)
+                                    → model: brandName, heroTitle, heroSubtitle, featured products, cartCount
+                                    → template: index.html
+                                    → sections: Hero → Featured Products → New Arrivals → Features → Footer
+                                    → New Arrivals section: 3 products displayed in a responsive grid
+```
+
 ### Blog Flow
 ```
 Browser → GET /blog                → BlogController.blogList()
@@ -202,3 +211,8 @@ All pages share header and footer via Thymeleaf `th:replace`:
 - Templates use Thymeleaf layout via `th:replace` with fragments from `fragments.html`
 - All classes are in the `com.claude.claudePractice` package (with sub-packages for controller, model, config, repository)
 - Tests use `@SpringBootTest` annotation for Spring context testing
+```
+
+## User Instructions
+
+**File Handling:** If the user asks to create any Markdown (.md) file, convert it to a local .claude file in the memory directory. This ensures consistent storage for future sessions. Use the `Write` tool to save the content as a .claude file in the designated memory path.
