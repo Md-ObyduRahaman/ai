@@ -9,17 +9,17 @@ metadata:
 
 ## 1. Context
 
-Build a **standalone Spring Boot application** that provides a RAG (Retrieval-Augmented Generation) chatbot answering user queries about **Ecommerce site (EC) policy** documents.
+Integrate a **RAG (Retrieval-Augmented Generation) chatbot** into the **existing ShopEasy Spring Boot application** that answers user queries about **Ecommerce site (EC) policy** documents.
 
 **Key technologies:**
-- Java 17 + Spring Boot 3.2.x
+- Java 17 + Spring Boot 3.2.x (existing)
 - Spring AI for embeddings + chat
-- **MySQL** as primary relational database (main application data)
+- **MySQL** as primary relational database (existing ShopEasy database)
 - **PostgreSQL + pgvector** as secondary vector store (semantic search)
 - Apache Tika for document parsing
 - Anthropic Claude API for LLM responses
 
-**Scope:** This will be a **new microservice**, separate from the existing ShopEasy e-commerce app.
+**Scope:** This will be a **new feature module** within the existing ShopEasy e-commerce app.
 
 ---
 
